@@ -64,15 +64,15 @@
         <form action="index.php" method="GET">
             <input type="checkbox" name="disp_park">
             <label for="radio_btn">Disponibilità di Parcheggio</label>
-            <input value="1" type="checkbox" name="min_vote">
+            <input value="1" type="radio" name="min_vote">
             <label for="votes">1 stella</label>
-            <input value="2" type="checkbox" name="min_vote">
+            <input value="2" type="radio" name="min_vote">
             <label for="votes">2 stella</label>
-            <input value="3" type="checkbox" name="min_vote">
+            <input value="3" type="radio" name="min_vote">
             <label for="votes">3 stella</label>
-            <input value="4" type="checkbox" name="min_vote">
+            <input value="4" type="radio" name="min_vote">
             <label for="votes">4 stella</label>
-            <input value="5" type="checkbox" name="min_vote">
+            <input value="5" type="radio" name="min_vote">
             <label for="votes">5 stella</label>
             <button>FILTRA</button>
         </form>
@@ -86,9 +86,8 @@
                 <th>Voto</th>
                 <th>Distanza dal centro in km</th>
             </tr>
-            <?php if(empty($disp_park)) ?>
             <?php foreach($hotels as $hotel): ?>
-                <?php if(empty($disp_park) || $hotel['parking']): ?>
+                <?php if((empty($disp_park) || $hotel['parking']) && $filter_vote <= $hotel['vote']): ?>
             <tr>
                 <td><?php echo $hotel['name'] ?></td>
                 <td><?php echo $hotel['description'] ?></td>
