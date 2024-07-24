@@ -1,4 +1,7 @@
 <?php
+
+    $disp_park = $_GET;
+    var_dump(!empty($disp_park));
     $hotels = [
 
         [
@@ -51,6 +54,13 @@
 </head>
 <body>
     <div class="container">
+        <form action="index.php" method="GET">
+            <input type="checkbox" name="disp_park">
+            <label for="radio_btn">Disponibilità di Parcheggio</label>
+            <button>FILTRA</button>
+        </form>
+    </div>
+    <div class="container">
         <table>
             <tr>
                 <th>Nome Hotel</th>
@@ -60,6 +70,7 @@
                 <th>Distanza dal centro in km</th>
             </tr>
             <?php foreach($hotels as $hotel): ?>
+                <?php if(empty($disp_park) || $hotel['parking']): ?>
             <tr>
                 <td><?php echo $hotel['name'] ?></td>
                 <td><?php echo $hotel['description'] ?></td>
@@ -67,6 +78,7 @@
                 <td><?php echo $hotel['vote']?></td>
                 <td><?php echo $hotel['distance_to_center'] ?></td>
             </tr>
+            <?php endif; ?>
             <?php endforeach; ?>
         </table>
     </div>
