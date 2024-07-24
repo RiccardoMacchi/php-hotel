@@ -1,7 +1,14 @@
 <?php
 
-    $disp_park = $_GET;
-    var_dump(!empty($disp_park));
+    $disp_park = $_GET["disp_park"];
+    var_dump(empty($disp_park));
+
+    $filter_vote = $_GET["min_vote"];
+    
+    echo "===============";
+    var_dump($disp_park);
+
+
     $hotels = [
 
         [
@@ -41,7 +48,7 @@
         ],
 
     ];
-
+    var_dump($filter_vote >= $hotels[0]['vote']);
 
 ?>
 
@@ -57,6 +64,16 @@
         <form action="index.php" method="GET">
             <input type="checkbox" name="disp_park">
             <label for="radio_btn">Disponibilità di Parcheggio</label>
+            <input value="1" type="checkbox" name="min_vote">
+            <label for="votes">1 stella</label>
+            <input value="2" type="checkbox" name="min_vote">
+            <label for="votes">2 stella</label>
+            <input value="3" type="checkbox" name="min_vote">
+            <label for="votes">3 stella</label>
+            <input value="4" type="checkbox" name="min_vote">
+            <label for="votes">4 stella</label>
+            <input value="5" type="checkbox" name="min_vote">
+            <label for="votes">5 stella</label>
             <button>FILTRA</button>
         </form>
     </div>
@@ -69,6 +86,7 @@
                 <th>Voto</th>
                 <th>Distanza dal centro in km</th>
             </tr>
+            <?php if(empty($disp_park)) ?>
             <?php foreach($hotels as $hotel): ?>
                 <?php if(empty($disp_park) || $hotel['parking']): ?>
             <tr>
@@ -78,7 +96,7 @@
                 <td><?php echo $hotel['vote']?></td>
                 <td><?php echo $hotel['distance_to_center'] ?></td>
             </tr>
-            <?php endif; ?>
+                <?php endif; ?>
             <?php endforeach; ?>
         </table>
     </div>
